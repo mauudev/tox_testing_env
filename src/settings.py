@@ -35,10 +35,7 @@ class AppSettings:
         config_file_to_use = LOCAL_CONFIG_PATH
         environment = os.getenv("ENV")
 
-        if environment == "docker":
-            print(f"Using docker config file {DOCKER_APP_CONFIG_PATH}")
-            config_file_to_use = DOCKER_APP_CONFIG_PATH
-        elif environment == "test":
+        if environment == "test":
             print(f"Using testing config file {TESTING_ENV_CONFIG_PATH}")
             config_file_to_use = TESTING_ENV_CONFIG_PATH
         elif environment == "local":
