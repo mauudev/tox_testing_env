@@ -33,13 +33,13 @@ async def test_read_item(async_client):
     }
 
 
-# @pytest.mark.anyio
-# async def test_read_inexistent_item(async_client):
-#     response = await async_client.get(
-#         "/items/999",
-#     )
-#     assert response.status_code == 404
-#     assert response.json() == {"detail": "Item not found"}
+@pytest.mark.anyio
+async def test_read_inexistent_item(async_client):
+    response = await async_client.get(
+        "/items/999",
+    )
+    assert response.status_code == 404
+    assert response.json() == {"message": "Item, with id [999] not found"}
 
 
 @pytest.mark.anyio

@@ -8,6 +8,7 @@ from pydantic import BaseModel
 
 from src import use_cases
 from src.database import Base, Database, build_async_engine
+from src.models.item import ItemNotFound
 from src.settings import APP_SETTINGS
 
 
@@ -69,6 +70,8 @@ async def get_item(
         read_command = use_cases.GetItemCommand(id=item_id)
         item = await use_case.handle(command=read_command, db_conn=db_conn)
         return item
+    except ItemNotFound as e:
+        return JSONResponse(status_code=404, content={"message": str(e)})
     except Exception as e:
         return JSONResponse(status_code=500, content={"message": str(e)})
 
